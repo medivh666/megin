@@ -2,7 +2,7 @@
 
 ## 框架特点
 
-- **自动生成接口文档**：根据 Router 注册信息、请求/响应 DTO 和 Handler 注释生成 OpenAPI 文档；`/api`、`/admin-api` 可分别生成并访问各自的接口文档。详细说明见 [API 文档专题](docs/api-doc-topic.md)。
+- **自研接口文档系统**：文档扫描与生成核心由项目基于 Go AST（抽象语法树）自行开发，不使用 Swagger/Swag 一类第三方注解扫描生成器。系统会解析 Router 注册信息、请求/响应 DTO 和 Handler 注释，自动输出 OpenAPI JSON；`/api`、`/admin-api` 可分别生成并访问各自的接口文档，Knife4j 只负责前端页面展示。详细说明见 [API 文档专题](docs/api-doc-topic.md)。
 - **自带管理后台基础模块**：内置管理员、角色、菜单、API、字典和 Casbin 权限等基础能力，并兼容现有 GinVueAdmin 管理后台。接口约定见 [系统管理接口契约](docs/system-api-contract.md)。
 - **Router 自动绑定参数**：泛型 Router 统一完成参数绑定和校验；GET 自动处理 query/path 参数，POST 自动处理 JSON Body，Handler 直接接收强类型请求 DTO。
 - **Router 请求策略**：可在注册路由时按需声明限流、Redis 读穿透缓存、写后删除缓存和并发控制（Redis 分布式锁），无需在 Handler 中重复编写样板代码。

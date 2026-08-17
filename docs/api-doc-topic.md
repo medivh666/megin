@@ -48,6 +48,10 @@
 
 ### 3.2 OpenAPI JSON 生成方式
 
+后端文档生成器由本项目自行开发，核心基于 Go AST（抽象语法树）解析 Router 注册信息、请求/响应 DTO 和 Handler 注释，不依赖 Swagger/Swag 一类第三方注解扫描生成器。
+
+这里的 OpenAPI JSON 是生成结果所采用的标准格式，不代表项目使用 Swagger 生成文档。前端 Knife4j 只负责读取并展示生成后的 OpenAPI JSON，不参与后端源码扫描和文档生成。
+
 项目启动时，如果 `conf.ApiDoc.Enable` 为 `true`，会执行：
 
 1. `genOpenApiDoc(registry)`
