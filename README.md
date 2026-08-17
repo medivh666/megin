@@ -7,6 +7,71 @@
 - **Router 自动绑定参数**：泛型 Router 统一完成参数绑定和校验；GET 自动处理 query/path 参数，POST 自动处理 JSON Body，Handler 直接接收强类型请求 DTO。
 - **Router 请求策略**：可在注册路由时按需声明限流、Redis 读穿透缓存、写后删除缓存和并发控制（Redis 分布式锁），无需在 Handler 中重复编写样板代码。
 
+## 项目结构
+
+```text
+.
+├── main.go                      mixed 模式入口，同时提供 /api 和 /admin-api
+├── cmd/
+│   ├── api/                     只启动前台 /api 服务
+│   └── admin-api/               只启动后台 /admin-api 服务
+├── config/                      dev、test、prod 环境配置
+├── internal/                    项目内部业务实现
+│   ├── api/                     前台业务 Handler
+│   ├── admin-api/               后台业务 Handler
+│   │   └── system/              管理后台基础模块 Handler
+│   ├── module/                  普通业务领域模块
+│   │   └── {domain}/
+│   │       ├── biz/             可选，复杂流程和跨 Service 编排
+│   │       ├── dto/             领域内请求和响应数据结构
+│   │       ├── convert/         Model 与 DTO 转换
+│   │       ├── model/           GORM 数据模型
+│   │       ├── repository/      数据访问
+│   │       └── service/         领域业务逻辑
+│   ├── base/                    通用 Model、Service 和 Repository 基类
+│   ├── system/                  管理后台基础模块的内部实现
+│   │   ├── dto/                 system 请求和响应 DTO
+│   │   ├── model/               system GORM 数据模型
+│   │   ├── repository/          system 数据访问
+│   │   ├── router/              system 路由注册
+│   │   └── service/             system 业务逻辑
+│   ├── router/                  /api、/admin-api 和文档路由装配
+│   ├── middleware/              JWT、Casbin、日志、跨域等中间件
+│   ├── cache/                   项目缓存实例和业务缓存 Key
+│   ├── config/                  配置加载与配置结构
+│   └── schedule/                定时任务
+├── pkg/                         可复用的通用基础能力
+│   ├── bootstrap/               服务启动和基础设施初始化
+│   ├── context/api/             API Context、统一响应和请求策略
+│   ├── context/router/          泛型 Router、参数绑定和校验
+│   ├── cache/                   Redis 与本地缓存基础封装
+│   ├── captcha/                 验证码能力
+│   ├── database/                数据库基础设施
+│   ├── gen/                     通用代码生成能力
+│   ├── openapi/                 基于 Go AST 的自研文档生成器
+│   ├── errs/                    统一错误类型
+│   ├── logger/                  日志能力
+│   ├── utils/                   通用工具函数
+│   └── validate/                参数校验扩展
+├── static/
+│   ├── swagger/                 自动生成的 OpenAPI JSON
+│   └── knife/                   Knife4j 文档展示页面
+├── docs/                        开发规范、专题说明和 SQL
+├── tools/                       GORM 等代码生成工具
+└── test/                        接口与集成测试
+```
+
+普通业务的标准依赖方向：
+
+```text
+router -> handler -> biz（可选） -> service -> repository -> model
+```
+
+- 前台 Handler 放在 `internal/api`，后台 Handler 放在 `internal/admin-api`。
+- 普通业务能力放在 `internal/module/{domain}`，前后台可以复用 Service、Repository 和 Model。
+- 管理员、角色、菜单、API、字典和 Casbin 等兼容模块放在 `internal/system` 与 `internal/admin-api/system`，不作为新业务模块的开发模板。
+- 完整分层边界参见 [Shop-API 架构与开发规范](docs/architecture-dev-guide.md)。
+
 ## 新手引导
 
 第一次参与本项目开发，建议先看：
