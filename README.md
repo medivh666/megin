@@ -4,11 +4,11 @@
 
 第一次参与本项目开发，建议先看：
 
-- [AGENTS.md](AGENTS.md)
-- [docs/new-developer-guide.md](docs/new-developer-guide.md)
-- [docs/codex-crud-guide.md](docs/codex-crud-guide.md)
-- [docs/module-crud-conventions.md](docs/module-crud-conventions.md)
-- [docs/architecture-dev-guide.md](docs/architecture-dev-guide.md)
+- 开发引导与通用规则：[AGENTS.md](AGENTS.md)
+- Shop-API 新手引导：[docs/new-developer-guide.md](docs/new-developer-guide.md)
+- Codex 极简开发约定：[docs/codex-crud-guide.md](docs/codex-crud-guide.md)
+- 常用模块 CRUD 规范：[docs/module-crud-conventions.md](docs/module-crud-conventions.md)
+- Shop-API 架构与开发规范：[docs/architecture-dev-guide.md](docs/architecture-dev-guide.md)
 
 ## 配置说明
 
