@@ -64,10 +64,7 @@ type Article struct{}
 
 // Detail @Summary 根据 ID 查询文章详情
 // @Description 根据文章 ID 获取文章的详细信息
-func (this *Article) Detail(
-	ctx *api.Context,
-	req *base.BaseId,
-) (*api.Result[dto.Article], error) {
+func (this *Article) Detail(ctx *api.Context, req *base.BaseId) (*api.Result[dto.Article], error) {
 	data, err := service.NewArticle(ctx).GetById(req.ID)
 	if err != nil {
 		return nil, err
@@ -77,10 +74,7 @@ func (this *Article) Detail(
 
 // Create @Summary 创建文章
 // @Description 创建一篇新的文章
-func (this *Article) Create(
-	ctx *api.Context,
-	req *dto.CreateArticle,
-) (*api.Result[any], error) {
+func (this *Article) Create(ctx *api.Context, req *dto.CreateArticle) (*api.Result[any], error) {
 	_, err := service.NewArticle(ctx).Create(req)
 	if err != nil {
 		return nil, err
