@@ -4,11 +4,11 @@
 
 第一次参与本项目开发，建议先看：
 
-- [AGENTS.md](/Users/lchb/go_admin/gin-vue-admin/shop-api/AGENTS.md)
-- [docs/new-developer-guide.md](/Users/lchb/go_admin/gin-vue-admin/shop-api/docs/new-developer-guide.md)
-- [docs/codex-crud-guide.md](/Users/lchb/go_admin/gin-vue-admin/shop-api/docs/codex-crud-guide.md)
-- [docs/module-crud-conventions.md](/Users/lchb/go_admin/gin-vue-admin/shop-api/docs/module-crud-conventions.md)
-- [docs/architecture-dev-guide.md](/Users/lchb/go_admin/gin-vue-admin/shop-api/docs/architecture-dev-guide.md)
+- [AGENTS.md](AGENTS.md)
+- [docs/new-developer-guide.md](docs/new-developer-guide.md)
+- [docs/codex-crud-guide.md](docs/codex-crud-guide.md)
+- [docs/module-crud-conventions.md](docs/module-crud-conventions.md)
+- [docs/architecture-dev-guide.md](docs/architecture-dev-guide.md)
 
 ## 配置说明
 
